@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './TodoItem.css';
+import React, { useState } from "react";
+import "./TodoItem.css";
 
 // This component displays a single todo item
 // PROPS: todo object, onToggle function, onDelete function, onEdit function
@@ -13,6 +13,7 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
   const handleSave = () => {
     if (editedTitle.trim()) {
       onEdit(todo.id, editedTitle);
+      console.log(`${todo.id} ${editedTitle}`);
       setIsEditing(false);
     }
   };
@@ -25,13 +26,13 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
 
   // Handle Enter key to save
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSave();
-    } else if (e.key === 'Escape') {
+    } else if (e.key === "Escape") {
       handleCancel();
     }
   };
-  
+
   return (
     <div className="todo-item">
       {/* Checkbox to mark todo as complete/incomplete */}
@@ -42,7 +43,7 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
         className="todo-checkbox"
         disabled={isEditing}
       />
-      
+
       {/* Show input when editing, otherwise show title */}
       {isEditing ? (
         <input
@@ -54,36 +55,27 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
           autoFocus
         />
       ) : (
-        <span className={`todo-title ${todo.completed ? 'completed' : ''}`}>
+        <span className={`todo-title ${todo.completed ? "completed" : ""}`}>
           {todo.title}
         </span>
       )}
-      
+
       {/* Badge showing todo ID */}
       <span className="todo-id">ID: {todo.id}</span>
-      
+
       {/* Show Save/Cancel buttons when editing, otherwise show Edit/Delete */}
       {isEditing ? (
         <>
-          <button
-            onClick={handleSave}
-            className="save-button"
-          >
+          <button onClick={handleSave} className="save-button">
             ✓ Save
           </button>
-          <button
-            onClick={handleCancel}
-            className="cancel-button"
-          >
+          <button onClick={handleCancel} className="cancel-button">
             ✕ Cancel
           </button>
         </>
       ) : (
         <>
-          <button
-            onClick={() => setIsEditing(true)}
-            className="edit-button"
-          >
+          <button onClick={() => setIsEditing(true)} className="edit-button">
             ✏️ Edit
           </button>
           <button
