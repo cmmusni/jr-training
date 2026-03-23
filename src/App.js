@@ -142,9 +142,9 @@ function App() {
     const todoToUpdate = todos.find((todo) => todo.id === id);
 
     try {
-      todoToUpdate.title = newTitle;
       // Making a PUT request to update the todo
       // Edit TODO: Implement the API call to update the todo's title
+      todoToUpdate.title = newTitle;
     } catch (err) {
       setError(err.message);
     }
